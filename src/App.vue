@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h2 class="app__title">Добавление товара</h2>
+    <h2 class="app__title">{{ title }}</h2>
   </header>
   <main class="container">
     <div class="container__addcard">
@@ -18,6 +18,7 @@ export default {
   name: "App",
   data() {
     return {
+      title: "Добавление товара",
       cards: [
         {
           id: 1,

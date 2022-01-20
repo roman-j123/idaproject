@@ -75,6 +75,10 @@
   background-color: rgba(255, 132, 132, 1);
   border-radius: 10px;
   cursor: pointer;
+  transition: 0.3s;
+}
+.card__delete:hover {
+  background-color: rgb(176, 91, 91);
 }
 .card:hover .card__delete {
   display: block;
