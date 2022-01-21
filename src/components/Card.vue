@@ -10,7 +10,7 @@
       <p class="card__text">
         {{ card.description }}
       </p>
-      <span class="card__price">{{ card.price }} руб.</span>
+      <span class="card__price">{{ money(card.price) }}</span>
     </div>
   </li>
 </template>
@@ -18,6 +18,12 @@
 <script>
 export default {
   props: ["card", "index"],
+  methods: {
+    money(value) {
+      if (!value) return "";
+      return `${value} руб.`;
+    },
+  },
 };
 </script>
 

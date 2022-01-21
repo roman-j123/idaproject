@@ -2,10 +2,9 @@
   <ul class="cardlist">
     <Card
       v-bind:card="card"
-      v-on:removeCard="removeCard"
-      v-for="(card, index) of cards"
-      :key="index"
-      :index="index"
+      v-for="card of cards"
+      :key="card.id"
+      @click="removeCard(card.id)"
     />
   </ul>
 </template>
@@ -13,14 +12,12 @@
 <script>
 import Card from "@/components/Card";
 export default {
-  props: ["cards"],
+  props: {
+    cards: Array,
+    removeCard: Function,
+  },
   components: {
     Card,
-  },
-  methods: {
-    removeCard(index) {
-      this.$emit("removeCard", index);
-    },
   },
 };
 </script>

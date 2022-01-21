@@ -19,10 +19,11 @@
           minlength="5"
           maxlength="25"
           id="card-name"
-          v-model="cardName"
+          v-model="newCard.title"
+          @input="checkInput('title')"
           placeholder="Введите наименование товара"
         />
-        <p class="addcard__error"></p>
+        <p class="addcard__error" v-if="isValidName">{{ errorMessage }}</p>
       </div>
       <div class="addcard__block">
         <label for="card-description" class="addcard__title"
@@ -33,7 +34,7 @@
           type="text"
           maxlength="200"
           id="card-description"
-          v-model="cardDescription"
+          v-model="newCard.description"
           placeholder="Введите описание товара"
         ></textarea>
       </div>
@@ -48,10 +49,11 @@
           class="addcard__input"
           type="url"
           id="card-href"
-          v-model="cardImage"
+          v-model="newCard.link"
+          @input="checkInput('link')"
           placeholder="Введите ссылку"
         />
-        <p class="addcard__error"></p>
+        <p class="addcard__error" v-if="isValidLink">{{ errorMessage }}</p>
       </div>
       <div class="addcard__block">
         <div class="addcard__label">
@@ -62,12 +64,15 @@
           class="addcard__input"
           type="number"
           id="card-price"
-          v-model="cardPrice"
+          v-model="newCard.price"
+          @input="checkInput('price')"
           placeholder="Введите цену"
         />
-        <p class="addcard__error"></p>
+        <p class="addcard__error" v-if="isValidPrice">{{ errorMessage }}</p>
       </div>
-      <button type="submit" class="addcard__button">Добавить товар</button>
+      <button type="submit" class="addcard__button" :disabled="!isValid">
+        Добавить товар
+      </button>
     </form>
   </div>
 </template>
@@ -76,26 +81,57 @@
 export default {
   data() {
     return {
-      cardName: "",
-      cardDescription: "",
-      cardImage: "",
-      cardPrice: "",
+      defaulCard: {
+        title: "",
+        description: "",
+        link: "",
+        price: null,
+        id: null,
+      },
+      newCard: {},
+      isValidName: false,
+      isValidLink: false,
+      isValidPrice: false,
+      errorMessage: "Поле является обязательным",
     };
   },
+  props: {
+    addCard: Function,
+  },
+  created() {
+    this.newCard = JSON.parse(JSON.stringify(this.defaulCard));
+  },
   methods: {
+    checkInput(fieldName) {
+      switch (fieldName) {
+        case "title":
+          {
+            this.isValidName = this.newCard.title ? false : true;
+          }
+          break;
+        case "link":
+          {
+            this.isValidLink = this.newCard.link ? false : true;
+          }
+          break;
+        case "price":
+          {
+            this.isValidPrice = this.newCard.price ? false : true;
+          }
+          break;
+      }
+    },
     checkForm(event) {
       event.preventDefault();
-      const cardData = {
-        title: this.cardName,
-        description: this.cardDescription,
-        link: this.cardImage,
-        price: this.cardPrice,
-      };
-      this.$emit("add-card", cardData);
-      this.cardName = null;
-      this.cardDescription = null;
-      this.cardImage = null;
-      this.cardPrice = null;
+      console.log(this.newCard);
+      this.addCard(this.newCard);
+
+      this.newCard = JSON.parse(JSON.stringify(this.defaulCard));
+    },
+  },
+  computed: {
+    isValid() {
+      return this.isValidName && this.isValidLink && this.isValidPrice;
     },
   },
 };
@@ -181,11 +217,17 @@ export default {
   font-size: 12px;
   line-height: 15px;
   font-weight: 600;
-  color: #b4b4b4;
   height: 36px;
   border: none;
+  background-color: rgba(123, 174, 115, 1);
+  color: rgba(255, 255, 255, 1);
   border-radius: 10px;
 }
+.addcard__button:disabled {
+  color: #b4b4b4;
+  background-color: rgba(238, 238, 238, 1);
+}
+
 .addcard__button:hover {
   cursor: pointer;
 }

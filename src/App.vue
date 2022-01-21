@@ -4,8 +4,8 @@
     <select v-model="selected" class="filter">
       <option
         v-for="option in options"
-        v-bind:value="option.value"
-        v-bind:key="option.value"
+        :value="option.value"
+        :key="option.value"
       >
         {{ option.text }}
       </option>
@@ -13,9 +13,9 @@
   </header>
   <main class="container">
     <div class="container__addcard">
-      <AddCard @add-card="addCard" />
+      <AddCard :add-card="addCard" />
     </div>
-    <CardList v-bind:cards="cards" @removeCard="removeCard" />
+    <CardList :cards="cardsFiltered" :removeCard="removeCard" />
   </main>
 </template>
 
@@ -25,6 +25,10 @@ import CardList from "@/components/CardList";
 import AddCard from "@/components/AddCard";
 export default {
   name: "App",
+  components: {
+    CardList,
+    AddCard,
+  },
   data() {
     return {
       title: "Добавление товара",
@@ -34,87 +38,61 @@ export default {
         { text: "По возрастанию цены", value: "minToMax" },
         { text: "По убыванию цены", value: "maxToMin" },
       ],
-      cards: [
-        {
-          title: "Наименование товара 1",
-          link: "https://images.unsplash.com/photo-1642697318738-c74f8eac0bd0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-          description:
-            "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "10000",
-        },
-        {
-          title: "Наименование товара 2",
-          link: "https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-          description:
-            "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "11000",
-        },
-        {
-          title: "Наименование товара 3",
-          link: "https://images.unsplash.com/photo-1642698058508-ce2ef292cc13?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-          description:
-            "Довольно-таки интересное описание товара в несколько строк. ",
-          price: "11100",
-        },
-        {
-          title: "Наименование товара 4",
-          link: "https://images.unsplash.com/photo-1638913662295-9630035ef770?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-          description:
-            "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "11110",
-        },
-        {
-          title: "Наименование товара 5",
-          link: "https://images.unsplash.com/photo-1642682713988-8451d7fb6acf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
-          description:
-            "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "11111",
-        },
-        {
-          title: "Наименование товара 6",
-          link: "https://images.unsplash.com/photo-1642683054267-cfc81c3a60de?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=689&q=80",
-          description:
-            "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "21111",
-        },
-        {
-          title: "Наименование товара 7",
-          link: "https://images.unsplash.com/photo-1642682969825-09c60a60e989?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=642&q=80",
-          description:
-            "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "22111",
-        },
-        {
-          title: "Наименование товара 8",
-          link: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-          description:
-            "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "22211",
-        },
-        {
-          title: "Наименование товара 9",
-          link: "https://images.unsplash.com/photo-1642616762342-e21f9eb2bf9e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-          description:
-            "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "22221",
-        },
-      ],
+      cards: [],
     };
+  },
+  created() {
+    const cards = localStorage.getItem("cards");
+    if (cards) this.cards = JSON.parse(cards);
+
+    this.$watch(
+      "cards",
+      (value) => {
+        localStorage.setItem("cards", JSON.stringify(value));
+      },
+      { deep: true }
+    );
   },
   methods: {
     addCard(data) {
+      data.id = this.max_id + 1;
+      console.log(data);
       this.cards.push(data);
       console.log(this.cards);
     },
-    removeCard(index) {
-      if (index !== -1) {
+    removeCard(id) {
+      if (confirm("Delete card ?")) {
+        const index = this.cards.findIndex((el) => el.id === id);
         this.cards.splice(index, 1);
       }
     },
   },
-  components: {
-    CardList,
-    AddCard,
+  computed: {
+    cardsFiltered() {
+      switch (this.selected) {
+        case "default": {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          return this.cards.sort((a, b) => a.id - b.id);
+        }
+        case "minToMax": {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          return this.cards.sort((a, b) => a.price - b.price);
+        }
+        case "maxToMin": {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          return this.cards.sort((a, b) => b.price - a.price);
+        }
+        default: {
+          return this.cards;
+        }
+      }
+    },
+    max_id() {
+      if (this.cards.lenght === 0) return 1;
+      return this.cards.reduce((max, el) => {
+        return (max = el.id > max ? el.id : max);
+      }, 0);
+    },
   },
 };
 </script>
