@@ -73,6 +73,7 @@
   background-repeat: no-repeat;
   background-position: center;
   background-color: rgba(255, 132, 132, 1);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   cursor: pointer;
   transition: 0.3s;
