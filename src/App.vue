@@ -1,6 +1,15 @@
 <template>
   <header>
     <h2 class="app__title">{{ title }}</h2>
+    <select v-model="selected" class="filter">
+      <option
+        v-for="option in options"
+        v-bind:value="option.value"
+        v-bind:key="option.value"
+      >
+        {{ option.text }}
+      </option>
+    </select>
   </header>
   <main class="container">
     <div class="container__addcard">
@@ -19,6 +28,12 @@ export default {
   data() {
     return {
       title: "Добавление товара",
+      selected: "default",
+      options: [
+        { text: "По умолчанию", value: "default" },
+        { text: "По возрастанию цены", value: "minToMax" },
+        { text: "По убыванию цены", value: "maxToMin" },
+      ],
       cards: [
         {
           id: 1,
@@ -123,6 +138,11 @@ body {
   margin: 0;
   background-color: rgba(255, 254, 251, 0.8);
 }
+header {
+  margin: 0 0 16px 0;
+  display: flex;
+  justify-content: space-between;
+}
 #app {
   margin: 0 auto;
   padding: 32px;
@@ -147,5 +167,22 @@ body {
 .container__addcard {
   width: 348px;
   flex-shrink: 0;
+}
+.filter {
+  width: 121px;
+  padding: 10px 16px;
+  background-color: #fffefb;
+  border: none;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  font-weight: 400;
+  color: #b4b4b4;
+  background-image: url("../src/assets/arrow.svg");
+  background-repeat: no-repeat;
+  background-position: center right 16px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  appearance: none;
+  cursor: pointer;
 }
 </style>
