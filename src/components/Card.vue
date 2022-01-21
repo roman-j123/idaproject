@@ -1,6 +1,9 @@
 <template>
   <li class="cardlist__item card">
-    <button class="card__delete"></button>
+    <button
+      class="card__delete"
+      v-on:click="$emit('removeCard', this.index)"
+    ></button>
     <img v-bind:src="card.link" v-bind:alt="card.title" class="card__img" />
     <div class="card__container">
       <h2 class="card__title">{{ card.title }}</h2>
@@ -11,6 +14,13 @@
     </div>
   </li>
 </template>
+
+<script>
+export default {
+  props: ["card", "index"],
+};
+</script>
+
 <style scoped>
 .cardlist__item {
   position: relative;
@@ -86,13 +96,3 @@
 }
 </style>
 
-<script>
-export default {
-  props: {
-    card: {
-      type: Object,
-      required: true,
-    },
-  },
-};
-</script>
