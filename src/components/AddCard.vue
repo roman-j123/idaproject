@@ -86,9 +86,9 @@ export default {
     checkForm(event) {
       event.preventDefault();
       const cardData = {
-        name: this.cardName,
+        title: this.cardName,
         description: this.cardDescription,
-        image: this.cardImage,
+        link: this.cardImage,
         price: this.cardPrice,
       };
       this.$emit("add-card", cardData);
