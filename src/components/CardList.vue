@@ -30,6 +30,7 @@ export default {
 .cardlist {
   max-width: 1028px;
   min-width: 320px;
+  margin: 0 0 0 0;
   padding: 0;
   list-style: none;
   display: grid;

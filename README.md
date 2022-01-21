@@ -17,6 +17,13 @@
 - JavaScript
 - GITHUB-PAGES
 
+**Функционал:**
+- Удаление карточки
+- Добавление карточки
+- Хранение краточек в LocalStorage (in progress)
+- Фильтрация карточек (in progress)
+- Валидация полей добавления карточки (in progress)
+
 ## Project setup
 ```
 npm install
