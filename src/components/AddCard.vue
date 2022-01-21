@@ -197,4 +197,10 @@ export default {
   border-radius: 50%;
   background-color: rgba(255, 132, 132, 1);
 }
+@media screen and (max-width: 744px) {
+  .addcard {
+    position: relative;
+    max-width: 100%;
+  }
+}
 </style>

@@ -28,12 +28,13 @@ export default {
 
 <style scoped>
 .cardlist {
-  width: 1028px;
+  max-width: 1028px;
+  min-width: 320px;
   margin: 0 0 0 auto;
   padding: 0;
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(332px, 1fr));
+  grid-gap: 16px;
 }
 </style>

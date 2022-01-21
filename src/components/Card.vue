@@ -24,7 +24,6 @@ export default {
 <style scoped>
 .cardlist__item {
   position: relative;
-  margin: 0 0 16px 0;
   max-width: 332px;
   width: 100%;
   height: 423px;
@@ -93,6 +92,11 @@ export default {
 }
 .card:hover .card__delete {
   display: block;
+}
+@media screen and (max-width: 744px) {
+  .cardlist__item {
+    margin: 0 auto 0 auto;
+  }
 }
 </style>
 

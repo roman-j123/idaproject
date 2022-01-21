@@ -161,6 +161,7 @@ header {
   box-sizing: border-box;
 }
 .container__addcard {
+  margin: 0 0 0 0;
   width: 348px;
   flex-shrink: 0;
 }
@@ -180,5 +181,14 @@ header {
   box-sizing: border-box;
   appearance: none;
   cursor: pointer;
+}
+@media screen and (max-width: 744px) {
+  .container {
+    flex-wrap: wrap;
+  }
+  .container__addcard {
+    width: 100%;
+    margin: 0 0 16px 0;
+  }
 }
 </style>
