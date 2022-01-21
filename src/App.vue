@@ -4,7 +4,7 @@
   </header>
   <main class="container">
     <div class="container__addcard">
-      <AddCard />
+      <AddCard @add-card="addCard" />
     </div>
     <CardList v-bind:cards="cards" />
   </main>
@@ -94,6 +94,12 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    addCard(data) {
+      this.cards.push(data);
+      console.log(this.cards);
+    },
   },
   components: {
     CardList,

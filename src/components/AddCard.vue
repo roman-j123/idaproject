@@ -19,11 +19,10 @@
           minlength="5"
           maxlength="25"
           id="card-name"
-          v-bind:value="cardName"
-          v-on:input="handleChangeInput"
+          v-model="cardName"
           placeholder="Введите наименование товара"
         />
-        <p v-if="errors.length" class="addcard__error">{{ errors[0] }}</p>
+        <p class="addcard__error"></p>
       </div>
       <div class="addcard__block">
         <label for="card-description" class="addcard__title"
@@ -34,8 +33,7 @@
           type="text"
           maxlength="200"
           id="card-description"
-          v-bind:value="cardDescription"
-          v-on:input="handleChangeInput"
+          v-model="cardDescription"
           placeholder="Введите описание товара"
         ></textarea>
       </div>
@@ -50,11 +48,10 @@
           class="addcard__input"
           type="url"
           id="card-href"
-          v-bind:value="cardImage"
-          v-on:input="handleChangeInput"
+          v-model="cardImage"
           placeholder="Введите ссылку"
         />
-        <p v-if="errors.length" class="addcard__error">{{ errors[1] }}</p>
+        <p class="addcard__error"></p>
       </div>
       <div class="addcard__block">
         <div class="addcard__label">
@@ -65,11 +62,10 @@
           class="addcard__input"
           type="number"
           id="card-price"
-          v-bind:value="cardPrice"
-          v-on:input="handleChangeInput"
+          v-model="cardPrice"
           placeholder="Введите цену"
         />
-        <p v-if="errors.length" class="addcard__error">{{ errors[2] }}</p>
+        <p class="addcard__error"></p>
       </div>
       <button type="submit" class="addcard__button">Добавить товар</button>
     </form>
@@ -80,7 +76,6 @@
 export default {
   data() {
     return {
-      errors: [],
       cardName: "",
       cardDescription: "",
       cardImage: "",
@@ -90,19 +85,17 @@ export default {
   methods: {
     checkForm(event) {
       event.preventDefault();
-      this.errors = [];
-      if (!this.cardName) {
-        this.errors.push("Укажите название карточки");
-      }
-      if (!this.cardImage) {
-        this.errors.push("Необходимо указать ссылку на изображение");
-      }
-      if (!this.cardPrice) {
-        this.errors.push("Необходимо указать стоимость товара");
-      }
-    },
-    handleChangeInput(event) {
-      console.log(event.target.form["card-name"].value);
+      const cardData = {
+        name: this.cardName,
+        description: this.cardDescription,
+        image: this.cardImage,
+        price: this.cardPrice,
+      };
+      this.$emit("add-card", cardData);
+      this.cardName = null;
+      this.cardDescription = null;
+      this.cardImage = null;
+      this.cardPrice = null;
     },
   },
 };
