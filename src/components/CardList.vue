@@ -38,16 +38,20 @@ export default {
   grid-gap: 16px;
 }
 .cardlist-empty {
-  position: absolute;
-  top: 50%;
+  padding: 220px 0 0 0;
+  position: sticky;
   left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
 }
 .cardlist-empty__header {
   margin: 0;
   font-size: 28px;
   line-height: 32px;
   color: rgba(255, 132, 132, 1);
+}
+@media screen and (max-width: 744px) {
+  .cardlist-empty {
+    padding: 0 0 0 0;
+    left: 0;
+  }
 }
 </style>
