@@ -128,7 +128,6 @@ header {
 }
 .app__title {
   margin: 0 0 16px 0;
-  font-family: "SourceSansPro", Helvetica, Arial;
   font-weight: 600;
   font-size: 28px;
   line-height: 32px;

@@ -15,6 +15,7 @@
         </div>
         <input
           class="addcard__input"
+          :class="isValidName ? 'addcard__input_error' : null"
           type="text"
           minlength="5"
           maxlength="25"
@@ -47,6 +48,7 @@
         </div>
         <input
           class="addcard__input"
+          :class="isValidLink ? 'addcard__input_error' : null"
           type="url"
           id="card-href"
           v-model="newCard.link"
@@ -62,6 +64,7 @@
         </div>
         <input
           class="addcard__input"
+          :class="isValidPrice ? 'addcard__input_error' : null"
           type="number"
           id="card-price"
           v-model="newCard.price"
@@ -102,6 +105,11 @@ export default {
     this.newCard = JSON.parse(JSON.stringify(this.defaulCard));
   },
   methods: {
+    money(value) {
+      const formatValue = new Intl.NumberFormat("ru-RU").format(value);
+      if (!value) return "";
+      return `${formatValue}`;
+    },
     checkInput(fieldName) {
       switch (fieldName) {
         case "title":
@@ -123,7 +131,6 @@ export default {
     },
     checkForm(event) {
       event.preventDefault();
-      console.log(this.newCard);
       this.addCard(this.newCard);
 
       this.newCard = JSON.parse(JSON.stringify(this.defaulCard));
@@ -131,7 +138,7 @@ export default {
   },
   computed: {
     isValid() {
-      return this.isValidName && this.isValidLink && this.isValidPrice;
+      return this.newCard.title && this.newCard.link && this.newCard.price;
     },
   },
 };
@@ -187,6 +194,9 @@ export default {
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   box-sizing: border-box;
+}
+.addcard__input_error {
+  outline: 1px solid rgba(255, 132, 132, 1);
 }
 .addcard__input:last-child {
   margin: 0 0 0 0;

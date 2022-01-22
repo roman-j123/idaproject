@@ -20,8 +20,9 @@ export default {
   props: ["card", "index"],
   methods: {
     money(value) {
+      const formatValue = new Intl.NumberFormat("ru-RU").format(value);
       if (!value) return "";
-      return `${value} руб.`;
+      return `${formatValue} руб.`;
     },
   },
 };
