@@ -1,13 +1,11 @@
 <template>
   <ul class="cardlist" v-if="cards.length !== 0">
-    <transition-group name="card" tag="ul">
-      <Card
-        v-bind:card="card"
-        v-for="card of cards"
-        :key="card.id"
-        @click="removeCard(card.id)"
-      />
-    </transition-group>
+    <Card
+      v-bind:card="card"
+      v-for="card of cards"
+      :key="card.id"
+      @click="removeCard(card.id)"
+    />
   </ul>
   <div class="cardlist-empty" v-else>
     <h2 class="cardlist-empty__header">Сейчас тут пусто :(</h2>
@@ -29,18 +27,6 @@ export default {
 
 
 <style scoped>
-.card-item {
-  display: inline-block;
-}
-.card-enter-active,
-.card-leave-active {
-  transition: all 1s ease;
-}
-.card-enter-from,
-.card-leave-to {
-  opacity: 0;
-  transform: translateY(30px);
-}
 .cardlist {
   max-width: 1028px;
   min-width: 320px;
