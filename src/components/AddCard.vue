@@ -65,7 +65,7 @@
         <input
           class="addcard__input"
           :class="isValidPrice ? 'addcard__input_error' : null"
-          type="text"
+          type="number"
           id="card-price"
           v-model="newCard.price"
           @input="checkInput('price')"
