@@ -4,7 +4,7 @@
       v-bind:card="card"
       v-for="card of cards"
       :key="card.id"
-      @click="removeCard(card.id)"
+      @removeCard="removeCard(card.id)"
     />
   </ul>
   <div class="cardlist-empty" v-else>

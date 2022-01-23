@@ -93,6 +93,7 @@ export default {
   border-radius: 10px;
   cursor: pointer;
   transition: 0.3s;
+  z-index: 999;
 }
 .card__delete:hover {
   background-color: rgb(176, 91, 91);
