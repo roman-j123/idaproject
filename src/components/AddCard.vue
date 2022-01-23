@@ -105,11 +105,6 @@ export default {
     this.newCard = JSON.parse(JSON.stringify(this.defaulCard));
   },
   methods: {
-    money(value) {
-      const formatValue = new Intl.NumberFormat("ru-RU").format(value);
-      if (!value) return "";
-      return `${formatValue}`;
-    },
     checkInput(fieldName) {
       switch (fieldName) {
         case "title":
